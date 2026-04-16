@@ -12,6 +12,7 @@ import com.example.note.DTO.NoteDTO;
 import com.example.note.Model.Note;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
@@ -36,6 +37,11 @@ public class NoteController {
     @PostMapping("note")
     public String postMethodName(@RequestBody NoteDTO dto) {
         return service.createNote(dto);
+    }
+
+    @PutMapping("note/{id}")
+    public String putMethodName(@PathVariable int id, @RequestBody NoteDTO dto) {
+       return service.updateNote(dto, id);
     }
     
 }

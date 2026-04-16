@@ -29,4 +29,13 @@ public class NoteService {
         repo.save(note);
         return "Saved Note with ID: " + note.getNoteId();
     }
+
+    public String updateNote(NoteDTO dto, int id){
+        Note note = repo.findById(id).orElse(null);
+        note.setTitle(dto.getTitle());
+        note.setContent(dto.getContent());
+        note.setTag(dto.getTag());
+        repo.save(note);
+        return "Updated Note with ID: " + id;
+    }
 }
