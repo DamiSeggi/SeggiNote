@@ -19,3 +19,7 @@ export async function updateNote(id, dto) {
   const res = await api.put(`/note/${id}`, dto)
   return res.data
 }
+
+export async function deleteNote(id) {
+    const res = await api.delete(`/note/${id}`)
+}
