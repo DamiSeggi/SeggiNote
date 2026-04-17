@@ -38,4 +38,10 @@ public class NoteService {
         repo.save(note);
         return "Updated Note with ID: " + id;
     }
+
+    public String deleteNote(int id){
+        Note note = repo.findById(id).orElse(null);
+        repo.delete(note);
+        return "Deleted Note with ID: " + id;
+    }
 }

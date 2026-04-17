@@ -2,6 +2,7 @@ package com.example.note.Controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +41,13 @@ public class NoteController {
     }
 
     @PutMapping("note/{id}")
-    public String putMethodName(@PathVariable int id, @RequestBody NoteDTO dto) {
+    public String updateNote(@PathVariable int id, @RequestBody NoteDTO dto) {
        return service.updateNote(dto, id);
+    }
+
+    @DeleteMapping("note/{id}")
+    public String deleteNote(@PathVariable int id){
+        return service.deleteNote(id);
     }
     
 }
