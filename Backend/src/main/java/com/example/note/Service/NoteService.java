@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.note.DTO.NoteDTO;
 import com.example.note.Model.Note;
 import com.example.note.Repository.NoteRepo;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class NoteService {
@@ -21,7 +22,8 @@ public class NoteService {
     }
 
     public Note getNote(int id){
-        return repo.findById(id).orElse(null);
+        return repo.findById(id).orElseThrow(() -> 
+            new EntityNotFoundException("Note with ID " + id + " not found"));
     }
 
     public String createNote(NoteDTO dto){
@@ -31,7 +33,8 @@ public class NoteService {
     }
 
     public String updateNote(NoteDTO dto, int id){
-        Note note = repo.findById(id).orElse(null);
+        Note note = repo.findById(id).orElseThrow(() -> 
+            new EntityNotFoundException("Note with ID " + id + " not found"));
         note.setTitle(dto.getTitle());
         note.setContent(dto.getContent());
         note.setTag(dto.getTag());
@@ -40,7 +43,8 @@ public class NoteService {
     }
 
     public String deleteNote(int id){
-        Note note = repo.findById(id).orElse(null);
+        Note note = repo.findById(id).orElseThrow(() -> 
+            new EntityNotFoundException("Note with ID " + id + " not found"));
         repo.delete(note);
         return "Deleted Note with ID: " + id;
     }
