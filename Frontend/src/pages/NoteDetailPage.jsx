@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { fetchNoteById } from '../api/noteApi'
+import { fetchNoteById, deleteNote } from '../api/noteApi'
 
 function NoteDetailPage() {
   const { id } = useParams()
@@ -8,6 +8,15 @@ function NoteDetailPage() {
   const [note, setNote]     = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError]   = useState(null)
+
+  const handleDelete = async () => {
+  try {
+    await deleteNote(id)
+    navigate('/') 
+  } catch (err) {
+    setError(err.message)
+  }
+}
 
   useEffect(() => {
     fetchNoteById(id)
@@ -24,6 +33,7 @@ function NoteDetailPage() {
       <button onClick={() => navigate(-1)}>Zurück</button>
       <h1>{note.title}</h1>
       <p>{note.content}</p>
+      <button onClick={handleDelete}>Löschen</button>    
     </div>
   )
 }

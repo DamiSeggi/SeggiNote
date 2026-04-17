@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 public class NoteController {
     private NoteService service;
 
@@ -25,27 +25,27 @@ public class NoteController {
         this.service = service;
     }
 
-    @GetMapping("notes")
+    @GetMapping("/notes")
     public List<Note> getAllNotes(){
         return service.getAllNotes();
     }
 
-    @GetMapping("note/{id}")
+    @GetMapping("/note/{id}")
     public Note getNote(@PathVariable int id){
         return service.getNote(id);
     }
 
-    @PostMapping("note")
-    public String postMethodName(@RequestBody NoteDTO dto) {
+    @PostMapping("/note")
+    public String createNote(@RequestBody NoteDTO dto) {
         return service.createNote(dto);
     }
 
-    @PutMapping("note/{id}")
+    @PutMapping("/note/{id}")
     public String updateNote(@PathVariable int id, @RequestBody NoteDTO dto) {
        return service.updateNote(dto, id);
     }
 
-    @DeleteMapping("note/{id}")
+    @DeleteMapping("/note/{id}")
     public String deleteNote(@PathVariable int id){
         return service.deleteNote(id);
     }
