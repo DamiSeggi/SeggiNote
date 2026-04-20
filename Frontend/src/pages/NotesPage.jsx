@@ -4,61 +4,80 @@ import { fetchAllNotes } from '../api/noteApi'
 import { createNote } from '../api/noteApi'
 
 function NotesPage() {
-  const [notes, setNotes]   = useState([])
+  const [notes, setNotes] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError]   = useState(null)
-    const [createMode, setCreateMode] = useState(false);
-    const [title, setTitle] = useState("")
-const [content, setContent] = useState("")
+  const [error, setError] = useState(null)
+  const [createMode, setCreateMode] = useState(false)
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
 
-useEffect(() => {
-  loadNotes()
-}, [])
+  useEffect(() => {
+    loadNotes()
+  }, [])
 
   const loadNotes = () => {
-  setLoading(true)
-  fetchAllNotes()
-    .then(data => setNotes(data))
-    .catch(err => setError(err.message))
-    .finally(() => setLoading(false))
-}
-
-  const handleSave = async () => {
-    await createNote({ title, content })
-    await loadNotes()
-    setCreateMode(false)
+    setLoading(true)
+    fetchAllNotes()
+      .then(data => setNotes(data))
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false))
   }
 
-  if (loading) return <p>Lädt...</p>
-  if (error)   return <p>Fehler: {error}</p>
+  const handleSave = async () => {
+    if (title.trim() && content.trim()) {
+      await createNote({ title, content })
+      await loadNotes()
+      setCreateMode(false)
+      setTitle("")
+      setContent("")
+    }
+  }
 
-    return (
-    createMode ? (
-        <div>
-        <button onClick={() => setCreateMode(false)}>X</button>
-        <h1>Note erstellen</h1>
+  if (loading) return <p className="loading">Loading...</p>
+  if (error) return <p className="error">Error: {error}</p>
 
-        <input placeholder='titel' value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        ></input>
-        <input placeholder='content' value={content}
-        onChange={(e) => setContent(e.target.value)}
-        ></input>
+  return (
+    <>
+      {createMode ? (
+        <div className="create-modal">
+          <div className="create-modal-content">
+            <div className="create-modal-header">
+              <h1>Create note</h1>
+              <button onClick={() => setCreateMode(false)}>✕</button>
+            </div>
 
-        <button onClick={handleSave}>save</button>
+            <input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+
+            <textarea
+              placeholder="Your note..."
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+
+            <div className="modal-buttons">
+              <button onClick={() => setCreateMode(false)}>cancel</button>
+              <button onClick={handleSave}>save</button>
+            </div>
+          </div>
         </div>
-    ) : (
-        <div className="notes-page">
-        <button onClick={() => setCreateMode(true)}> + </button>
-        <h1>Alle Notes</h1>
+      ) : null}
+
+      <div className="notes-page">
+        <button onClick={() => setCreateMode(true)}>+</button>
+        <h1>All notes</h1>
         <div className="notes-grid">
-            {notes.map(note => (
+          {notes.map(note => (
             <NoteCard key={note.noteId} note={note} />
-            ))}
+          ))}
         </div>
-        </div>
-    )
-    );
+      </div>
+    </>
+  )
 }
 
 export default NotesPage

@@ -23,21 +23,18 @@ function NoteDetailPage() {
     }
   }
 
-const handleUpdate = async () => {
-  try {
-    await updateNote(id, { title, content })
-
-    const fresh = await fetchNoteById(id)
-
-    setNote(fresh)
-    setTitle(fresh.title)
-    setContent(fresh.content)
-
-    setEditMode(false)
-  } catch (err) {
-    setError(err.message)
+  const handleUpdate = async () => {
+    try {
+      await updateNote(id, { title, content })
+      const fresh = await fetchNoteById(id)
+      setNote(fresh)
+      setTitle(fresh.title)
+      setContent(fresh.content)
+      setEditMode(false)
+    } catch (err) {
+      setError(err.message)
+    }
   }
-}
 
   useEffect(() => {
     fetchNoteById(id)
@@ -50,23 +47,27 @@ const handleUpdate = async () => {
       .finally(() => setLoading(false))
   }, [id])
 
-  if (loading) return <p>Lädt...</p>
-  if (error) return <p>Fehler: {error}</p>
+  if (loading) return <p className="loading">Loading...</p>
+  if (error) return <p className="error">Error: {error}</p>
+  if (!note) return null
 
   return (
     <div className="note-detail">
-      <button onClick={() => navigate(-1)}>Zurück</button>
+      <button onClick={() => navigate(-1)}>←</button>
 
       {editMode ? (
         <>
           <input
+            type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            placeholder="title"
           />
 
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            placeholder="content"
           />
 
           <button onClick={handleUpdate}>Speichern</button>
@@ -78,11 +79,11 @@ const handleUpdate = async () => {
           <p>{note.content}</p>
 
           <button onClick={() => setEditMode(true)}>
-            Bearbeiten
+            edit
           </button>
 
           <button onClick={handleDelete}>
-            Löschen
+            delete
           </button>
         </>
       )}
