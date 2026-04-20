@@ -10,6 +10,7 @@ function NotesPage() {
   const [createMode, setCreateMode] = useState(false)
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
+  const [tag, setTag] = useState("")
 
   useEffect(() => {
     loadNotes()
@@ -25,7 +26,7 @@ function NotesPage() {
 
   const handleSave = async () => {
     if (title.trim() && content.trim()) {
-      await createNote({ title, content })
+      await createNote({ title, content, tag: tag || null})
       await loadNotes()
       setCreateMode(false)
       setTitle("")
@@ -58,6 +59,18 @@ function NotesPage() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
+
+            <select
+              value={tag}
+              onChange={(e) => setTag(e.target.value)}
+            >
+              <option value="">Click to select a tag...</option>
+              <option value="WORK">Work</option>
+              <option value="HOBBY">Hobby</option>
+              <option value="HOME">Home</option>
+              <option value="PERSONAL">Personal</option>
+              <option value="OTHER">Other</option>
+            </select>
 
             <div className="modal-buttons">
               <button onClick={() => setCreateMode(false)}>cancel</button>

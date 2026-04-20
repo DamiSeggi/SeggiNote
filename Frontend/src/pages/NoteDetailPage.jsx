@@ -75,7 +75,10 @@ function NoteDetailPage() {
         </>
       ) : (
         <>
-          <h1>{note.title}</h1>
+          <div className="note-header">
+            <h1>{note.title}</h1>
+            <div>{note.tag}</div>
+          </div>
           <p>{note.content}</p>
 
           <button onClick={() => setEditMode(true)}>

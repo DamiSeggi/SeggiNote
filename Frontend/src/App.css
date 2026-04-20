@@ -320,6 +320,37 @@ a:hover {
   margin-top: var(--spacing-sm);
 }
 
+.note-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.note-header h1 {
+  margin-bottom: 0;
+}
+
+.note-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.note-header h1 {
+  margin-bottom: 0;
+}
+
+.note-header > div {
+  color: var(--accent-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 4px;
+  margin-left: 10px;
+}
+
+
 /* ========================================
    8. CREATE NOTE MODAL
    ======================================== */
@@ -395,6 +426,31 @@ a:hover {
   flex: 1;
 }
 
+select {
+  font-family: var(--font-sans);
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--paper-line);
+  background-color: var(--paper-white);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  transition: border-color var(--trans-smooth);
+  margin-bottom: var(--spacing-md);
+  cursor: pointer;
+  appearance: none;
+  background-image: none;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+select:hover {
+  border-color: var(--accent-primary);
+}
+
 /* ========================================
    9. LOADING & ERROR STATES
    ======================================== */
@@ -435,6 +491,7 @@ a:hover {
   .notes-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
+    margin-bottom: 50px;
   }
 
   .notes-page {
