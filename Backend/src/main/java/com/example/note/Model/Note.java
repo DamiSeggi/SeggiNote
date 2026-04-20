@@ -1,5 +1,6 @@
 package com.example.note.Model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,6 +14,7 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int noteId;
     private String title;
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
     @Enumerated(EnumType.STRING)
     private Tags tag;
