@@ -11,18 +11,27 @@ function NotesPage() {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [tag, setTag] = useState("")
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
-    loadNotes()
-  }, [])
+  loadNotes()
+}, [search])
 
   const loadNotes = () => {
-    setLoading(true)
-    fetchAllNotes()
-      .then(data => setNotes(data))
-      .catch(err => setError(err.message))
-      .finally(() => setLoading(false))
-  }
+  fetchAllNotes()
+    .then(data => {
+      if (search === "") {
+        setNotes(data)
+      } else {
+        const filtered = data.filter(note =>
+          note.title.toLowerCase().includes(search.toLowerCase())
+        )
+        setNotes(filtered)
+      }
+    })
+    .catch(err => setError(err.message))
+    .finally(() => setLoading(false))
+}
 
   const handleSave = async () => {
     if (title.trim() && content.trim()) {
@@ -83,6 +92,14 @@ function NotesPage() {
       <div className="notes-page">
         <button onClick={() => setCreateMode(true)}>+</button>
         <h1>All notes</h1>
+
+        <input 
+            type="text"
+            placeholder='search...'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}>
+        </input>
+
         <div className="notes-grid">
           {notes.map(note => (
             <NoteCard key={note.noteId} note={note} />
