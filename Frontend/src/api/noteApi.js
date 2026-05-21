@@ -23,3 +23,7 @@ export async function updateNote(id, dto) {
 export async function deleteNote(id) {
     const res = await api.delete(`/note/${id}`)
 }
+
+export async function managePin(id) {
+    const res = await api.patch(`/note/pin/${id}`)
+}
