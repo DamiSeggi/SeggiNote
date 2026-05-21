@@ -9,6 +9,8 @@ public class NoteDTO {
     private String content;
     @Enumerated(EnumType.STRING)
     private Tags tag;
+    private boolean pin;
+    public String date;
 
     public NoteDTO() {}
 
@@ -40,6 +42,22 @@ public class NoteDTO {
 
     public void setTag(Tags tag) {
         this.tag = tag;
+    }
+
+        public boolean getPin (){
+        return pin;
+    }
+
+    public void setPin(boolean pin) {
+        this.pin = pin;
+    }
+
+    public String getDate(){
+        return date;
+    }
+
+    public void setDate(String date){
+        this.date = date;
     }
 
 }

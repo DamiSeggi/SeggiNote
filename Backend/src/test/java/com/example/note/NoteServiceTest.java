@@ -33,7 +33,7 @@ class NoteServiceTest {
 
     @Test
     void getAllNotesTest() {
-        List<Note> notes = List.of(new Note("1", "Title", Tags.WORK));
+        List<Note> notes = List.of(new Note("1", "Title", Tags.WORK, false, "1.1.2000"));
 
         when(repo.findAll()).thenReturn(notes);
 
@@ -44,7 +44,7 @@ class NoteServiceTest {
 
     @Test
     void getNoteTest(){
-        Note note = new Note("1", "1", Tags.WORK);
+        Note note = new Note("1", "1", Tags.WORK, false, "1.1.2000");
 
         when(repo.findById(0)).thenReturn(Optional.of(note));
 
@@ -64,7 +64,7 @@ class NoteServiceTest {
     void createNoteTest(){
         NoteDTO dto = new NoteDTO("1", "1", Tags.WORK);
 
-        Note note = new Note("1", "1", Tags.WORK);
+        Note note = new Note("1", "1", Tags.WORK, false, "1.1.200");
 
         when(repo.save(any(Note.class))).thenReturn(note);
 
@@ -75,7 +75,7 @@ class NoteServiceTest {
 
     @Test 
     void deleteNoteTest(){
-        Note note = new Note("1", "1", Tags.WORK);
+        Note note = new Note("1", "1", Tags.WORK, false, "1.1.2000");
         
         when(repo.findById(0)).thenReturn(Optional.of(note));
 
@@ -94,7 +94,7 @@ class NoteServiceTest {
     @Test
     void updateNoteTest(){
         NoteDTO dto = new NoteDTO("Updated Title", "Updated Content", Tags.PERSONAL);
-        Note note = new Note("1", "1", Tags.WORK);
+        Note note = new Note("1", "1", Tags.WORK, false, "1.1.2000");
 
         when(repo.findById(0)).thenReturn(Optional.of(note));
         when(repo.save(any(Note.class))).thenReturn(note);

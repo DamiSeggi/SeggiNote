@@ -18,13 +18,17 @@ public class Note {
     private String content;
     @Enumerated(EnumType.STRING)
     private Tags tag;
+    private boolean pin = false;
+    public String date;
 
     public Note() {}
 
-    public Note(String title, String content, Tags tag){
+    public Note(String title, String content, Tags tag, boolean pin, String date){
         this.title = title;
         this.content = content;
         this.tag = tag;
+        this.pin = pin;
+        this.date = date;
     }
 
     public int getNoteId() {
@@ -59,4 +63,19 @@ public class Note {
         this.tag = tag;
     }
 
+    public boolean getPin (){
+        return pin;
+    }
+
+    public void setPin(boolean pin) {
+        this.pin = pin;
+    }
+
+    public String getDate(){
+        return date;
+    }
+
+    public void setDate(String date){
+        this.date = date;
+    }
 }
