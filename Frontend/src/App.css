@@ -260,6 +260,27 @@ a:hover {
   margin: 0;
 }
 
+.pin-button {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+.pin-button:hover {
+  background: transparent;
+  border: none;
+}
+
+.note-card > a {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 /* ========================================
    7. NOTE DETAIL PAGE
    ======================================== */
