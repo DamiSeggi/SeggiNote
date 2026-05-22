@@ -13,6 +13,7 @@ function NoteDetailPage() {
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [pin, setPin] = useState('')
 
   const handleDelete = async () => {
     try {
@@ -25,7 +26,7 @@ function NoteDetailPage() {
 
   const handleUpdate = async () => {
     try {
-      await updateNote(id, { title, content })
+      await updateNote(id, { title, content, pin })
       const fresh = await fetchNoteById(id)
       setNote(fresh)
       setTitle(fresh.title)
@@ -36,12 +37,23 @@ function NoteDetailPage() {
     }
   }
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const time = date.toLocaleTimeString('de-CH', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    })
+    const day = date.toLocaleDateString('de-CH')
+    return `${time}, ${day}`
+  }
+
   useEffect(() => {
     fetchNoteById(id)
       .then(data => {
         setNote(data)
         setTitle(data.title)
         setContent(data.content)
+        setPin(data.pin)
       })
       .catch(err => setError(err.message))
       .finally(() => setLoading(false))
@@ -88,6 +100,13 @@ function NoteDetailPage() {
           <button onClick={handleDelete}>
             delete
           </button>
+     
+          <div className="note-footer">
+            <p>{formatDate(note.date)}</p>
+            <span className="pin-status">
+            {note.pin && <span style={{ color: "green" }}>pinned</span>}            
+            </span>
+          </div>
         </>
       )}
     </div>

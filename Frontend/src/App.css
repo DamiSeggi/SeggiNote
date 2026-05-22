@@ -371,6 +371,26 @@ a:hover {
   margin-left: 10px;
 }
 
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--paper-line);
+}
+
+.note-footer p {
+  margin-bottom: 0;
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+}
+
+.pin-status {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
 
 /* ========================================
    8. CREATE NOTE MODAL
