@@ -101,9 +101,11 @@ function NotesPage() {
         </input>
 
         <div className="notes-grid">
-          {notes.map(note => (
+          {[...notes]
+          .sort((a, b) => b.pin - a.pin)
+          .map(note => (
             <NoteCard key={note.noteId} note={note} />
-          ))}
+        ))}
         </div>
       </div>
     </>
