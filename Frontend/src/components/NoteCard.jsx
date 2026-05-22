@@ -4,7 +4,7 @@ import { managePin } from '../api/noteApi';
 
 function NoteCard({ note }) {
 
-  const[pin, setPin] = useState(false);
+  const [pin, setPin] = useState(note.pin || false);
 
     const handlePin = async () => {
       try {
@@ -22,7 +22,7 @@ function NoteCard({ note }) {
         ? <span style={{ color: "green" }}>pinned</span> 
         : <span style={{ color: "grey" }}>pin</span>}
     </button>
-    
+
     <Link to={`/notes/${note.noteId}`}>
       <h2>{note.title}</h2>
       <p>{note.content?.substring(0, 100)}...</p>
