@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
+@Tag(name = "Notes", description = "CRUD operations for notes")
 @RestController
 @RequestMapping("/api/v1")
 public class NoteController {
@@ -26,33 +31,39 @@ public class NoteController {
         this.service = service;
     }
 
+    @Operation(summary = "Get all notes")
     @GetMapping("/notes")
     public List<Note> getAllNotes(){
         return service.getAllNotes();
     }
 
+    @Operation(summary = "Get a single note")
     @GetMapping("/note/{id}")
-    public Note getNote(@PathVariable int id){
+    public Note getNote(@Parameter(description = "Note ID") @PathVariable int id){
         return service.getNote(id);
     }
 
+    @Operation(summary = "Create a new note")
     @PostMapping("/note")
-    public String createNote(@RequestBody NoteDTO dto) {
+    public String createNote(@Valid @RequestBody NoteDTO dto) {
         return service.createNote(dto);
     }
 
+    @Operation(summary = "Update an existing note")
     @PutMapping("/note/{id}")
-    public String updateNote(@PathVariable int id, @RequestBody NoteDTO dto) {
-       return service.updateNote(dto, id);
+    public String updateNote(@Parameter(description = "Note ID") @PathVariable int id, @Valid @RequestBody NoteDTO dto) {
+    return service.updateNote(dto, id);
     }
 
+    @Operation(summary = "Delete a note")
     @DeleteMapping("/note/{id}")
-    public String deleteNote(@PathVariable int id){
+    public String deleteNote(@Parameter(description = "Note ID") @PathVariable int id){
         return service.deleteNote(id);
     }
 
+    @Operation(summary = "Toggle pin status of a note")
     @PatchMapping("/note/pin/{id}")
-    public String managePin(@PathVariable int id){
+    public String managePin(@Parameter(description = "Note ID") @PathVariable int id){
         return service.managePin(id);
     }
 }
