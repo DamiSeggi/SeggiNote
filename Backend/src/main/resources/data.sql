@@ -1,0 +1,22 @@
+INSERT IGNORE INTO note (note_id, title, content, tag, pin, date)
+VALUES
+    (1, 'Welcome Note', 'This is your first note. Feel free to edit or delete it.', 'OTHER', false, '2026-07-01T09:00:00'),
+    (2, 'Shopping List', 'Milk, eggs, bread, coffee, laundry detergent', 'HOME', false, '2026-07-01T09:05:00'),
+    (3, 'Project Ideas', 'Brainstorm features for the next side project', 'WORK', true, '2026-07-01T09:10:00'),
+    (4, 'Meeting Notes', 'Summary of today\'s team sync and next steps', 'WORK', false, '2026-07-01T09:15:00'),
+    (5, 'Book Recommendations', 'Clean Code, The Pragmatic Programmer, Refactoring', 'HOBBY', false, '2026-07-01T09:20:00'),
+    (6, 'Docker Cheatsheet', 'docker compose up --build, docker ps -a, docker logs -f', 'WORK', true, '2026-07-01T09:25:00'),
+    (7, 'Weekend Plans', 'Hiking trip, groceries, catch up on reading', 'HOBBY', false, '2026-07-01T09:30:00'),
+    (8, 'Bug Tracker', 'Fix login redirect issue, retest after deploy', 'WORK', false, '2026-07-01T09:35:00'),
+    (9, 'Learning Goals', 'Finish the SQL course, practice algorithms weekly', 'PERSONAL', true, '2026-07-01T09:40:00'),
+    (10, 'Recipe Idea', 'Try making homemade pasta with basil pesto', 'HOME', false, '2026-07-01T09:45:00'),
+    (11, 'API Design Notes', 'Keep endpoints RESTful, use DTOs to decouple from entities', 'WORK', false, '2026-07-01T09:50:00'),
+    (12, 'Random Thought', 'Look into whether config profiles are worth adding', 'OTHER', false, '2026-07-01T09:55:00'),
+    (13, 'Movie Night Ideas', 'List of films to watch this month', 'HOBBY', false, '2026-07-01T10:00:00'),
+    (14, 'Home Maintenance', 'Fix the kitchen tap, water the plants, take out recycling', 'HOME', false, '2026-07-01T10:05:00'),
+    (15, 'Study Notes', 'Review key concepts before the next exam', 'PERSONAL', false, '2026-07-01T10:10:00'),
+    (16, 'Travel Checklist', 'Passport, chargers, tickets, hotel confirmation', 'HOBBY', true, '2026-07-01T10:15:00'),
+    (17, 'Workout Plan', 'Three sessions a week, focus on strength training', 'PERSONAL', false, '2026-07-01T10:20:00'),
+    (18, 'Git Branching Practice', 'Review relative refs, ^ vs ~, branch -f exercises', 'WORK', false, '2026-07-01T10:25:00'),
+    (19, 'Gift Ideas', 'Brainstorm gift ideas for upcoming birthdays', 'OTHER', false, '2026-07-01T10:30:00'),
+    (20, 'Feature Backlog', 'Add tag filtering and search to the notes overview', 'OTHER', false, '2026-07-01T10:35:00');
